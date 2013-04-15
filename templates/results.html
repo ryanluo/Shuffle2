@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+	{% for course in course_list %}
+		{{ course['coursename'] }}, {{ course['profs'] }}, {{ course['description'] }}, {{ course['discipline'] }}
+		<br/>
+	{% endfor %}
+	<br/>
+	<br/>
+	Favorites
+	<br/>
+	{% for course in user_course_list %}
+		{{ course['coursename'] }}, {{ course['profs'] }}, {{ course['description'] }}, {{ course['discipline'] }}
+		<br/>
+	{% endfor %}
+{% endblock %}

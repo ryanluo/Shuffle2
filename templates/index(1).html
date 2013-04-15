@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+	<title>5C Shuffle</title>
+	<link rel="stylesheet" type="text/css" href="static/styles.css">
+</head>
+<body>
+	<img id="load" width="48px" height="48px" src="static/ajax-loader.gif"/>
+	<div class='page'>
+	<h1 class='title'>5C Shuffle</h1>
+	<div class='deck'>
+		{% for course in course_list %}
+			<div>{{course['coursename']}}</div>
+		{% endfor %}
+	</div>
+	<div class="button" id="deal">Deal</div>
+	<div class="button" id="return">Return</div>
+	<div class="button" id="shuffle">Shuffle</div>
+	<div class="border"></br></br><h2>Save</h2></div>
+</div>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script>
+		$(function(){
+	  		$(".card").draggable();
+	 	 });
+		$(document).ready(function(){
+			$(".page").hide();
+			$("#load").show();	
+		});
+		$(document).keyup(function(e){
+			if(e.keyCode === 32){
+				$(".page").show();
+				$("#load").hide();
+			}
+		});
+		$(function(){
+			var i = 0;
+			$('.card').click(function(){
+				$(this).animate({left: 25+'%', marginTop: 2+'em'},500, 'easeOutBack',function(){i--;$(this).css('z-index', i)}).animate({left: '555px', marginTop: 0+'em'},500, 'easeOutBack');
+			});
+		});
+		$(function(){
+			$("#shuffle").click(function(){
+				for(var i = 1;i<21;i+=2){
+					var order = Math.floor(Math.random()*20-20);
+					$("div.deck div:nth-child("+i+")").animate({left: '+=0px'},100).delay(15*i);
+					$("div.deck div:nth-child("+i+")").animate({left: 25+'%', marginTop: 2+'em'},500, 'easeOutBack',function(){i--;$("div.deck div:nth-child("+i+")").css('z-index', order)}).animate({left: '555px', marginTop: 0+'em'},500, 'easeOutBack');
+				}
+				for(var i = 2;i<21;i+=2){
+					var order = Math.floor(Math.random()*20-20);
+					$("div.deck div:nth-child("+i+")").animate({left: '+=0px'},100).delay(15*i);
+					$("div.deck div:nth-child("+i+")").animate({left: 25+'%', marginTop: 2+'em'},200,'easeOutBack',function(){$("div.deck div:nth-child("+i+")").css('z-index',order)}).animate({left: '555px', marginTop: 0+'em'},500, 'easeOutBack');
+				}
+			});
+		});
+	</script>
+</body>
+</html>
